@@ -1,0 +1,12 @@
+<!-- コメント投稿後に表示されるページ -->
+{% extends 'board/base.html' %}
+
+{% block content %}
+  <div class="container mt-4 text-center">
+    <h3>コメントが投稿されました！</h3>
+
+    <a href="{% url 'post_detail' post.pk %}" class="btn btn-success">
+      詳細に戻る
+    </a>
+  </div>
+{% endblock %}

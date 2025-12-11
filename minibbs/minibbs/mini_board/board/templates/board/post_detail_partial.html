@@ -1,0 +1,60 @@
+<!-- 記事詳細画面のテンプレート-->
+<div class="container mt-4">
+
+  <!-- 投稿カード部分 -->
+  <div class="mb-4">
+    {% include 'board/post_card_partial.html' %}
+  </div>
+
+  <!-- コメント一覧 -->
+  {% if post.comments.all %}
+  
+    {% for comment in post.comments.all %}
+    <div class="card shadow-sm d-inline-block comment-card mb-3" style="max-width: 100%;">
+
+      <!-- コメントカードヘッダー -->
+      <div class="card-header custom-comment-header">
+        コメント者: <a href="{% url 'user_posts' post.author.username %}">{{ comment.author.username }}</a>
+      </div>
+
+      <!-- コメント本文 -->
+      <div class="card-body">
+        <p class="card-text">{{ comment.content }}</p>
+      </div>
+
+      <div class="card-footer">
+
+        <!-- 日付エリア（フッターの中、下線の上） -->
+        <div class="comment-dates">
+          <div class="created-date">作成日: {{ comment.created_at|date:"Y/m/d H:i" }}</div>
+          {% if comment.created_at != comment.updated_at %}
+          <div class="updated-date">更新日: {{ comment.updated_at|date:"Y/m/d H:i" }}</div>
+          {% endif %}
+        </div>
+
+      </div>
+
+      <!-- 編集削除ボタンエリア（フッターの外＝下線の下） -->
+      {% if comment.author == user %}
+      <div class="comment-operation-area text-end mt-2">
+        <a href="{% url 'comment_edit' comment.pk %}" class="btn btn-outline-primary btn-sm">編集</a>
+        <a href="{% url 'comment_delete' comment.pk %}" class="btn btn-outline-danger btn-sm">削除</a>
+      </div>
+      {% endif %}
+
+    </div>
+    {% endfor %}
+
+  {% else %}
+    <p>まだコメントはありません。</p>
+  {% endif %}
+  
+
+  <!-- コメント投稿ボタン -->
+  <div class="mt-3 text-center">
+    <a href="{% url 'comment_create' post.pk %}" class="btn btn-primary">
+      コメントする
+    </a>
+  </div>
+
+</div>

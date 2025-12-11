@@ -1,0 +1,237 @@
+/* カードヘッダー用 */
+.custom-card-header {
+  background-color: #39ead5;
+  color: #231f1f;
+}
+
+/* 画像用 */
+.post-thumbnail {
+  object-fit: cover;
+  width: 100%;
+  height: 90px;
+  cursor: pointer;
+}
+
+/* 詳細モーダル内の画像 */
+#postDetailModal .post-thumbnail {
+  height: auto;
+  cursor: default;
+  object-fit: contain;
+}
+
+/* プロフ背景 */
+.custom-profile-bg {
+  background-color: #a7f193 !important;
+}
+
+/* 投稿日時 */
+.post-dates {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.post-dates .created-date {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.post-dates .updated-date {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.card-footer {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+}
+
+/* 新規投稿ボタン */
+.btn-new-post {
+  background-color: #d4edda;
+  color: #155724;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-new-post:hover {
+  background-color: #c3e6cb;
+}
+
+/* ログイン/ログアウトボタン */
+.btn-login-logout {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-login-logout:hover {
+  background-color: #5a6268;
+}
+
+/* いいねボタン */
+.btn-like {
+  background-color: #fff;
+  border: 2px solid #e0a800;
+  color: #e0a800;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s ease;
+  padding: 0;
+}
+
+.btn-like:hover {
+  background-color: #e0a800;
+  color: white;
+}
+
+.btn-like:active {
+  background-color: #e0a800;
+  color: #fff;
+  transform: scale(0.95);
+}
+
+/* 本文と操作エリアの間の仕切り線 */
+.post-bottom-divider {
+  border-bottom: 1px solid #ddd;
+  margin: 4px 0;
+}
+
+/* 操作エリア全体（横並び＆中央寄せ） */
+.operation-area {
+  display: flex;
+  justify-content: space-between; /* いいねと編集削除を左右に分ける */
+  align-items: center;
+  padding: 4px 8px;
+  border-top: 1px solid #ddd;
+  margin-top: 4px;
+}
+
+/* いいねエリア */
+.like-area {
+  display: flex;
+  align-items: center;
+}
+
+.like-area .btn-like {
+  margin-right: 4px;
+}
+
+/* 編集・削除 or ダミーエリア */
+.edit-area {
+  display: flex;
+  align-items: center;
+  min-height: 32px; /* 編集・削除ボタンの高さに合わせる */
+}
+
+.edit-area .btn-edit,
+.edit-area .btn-delete {
+  margin-left: 4px;
+}
+
+/* 編集ボタン */
+.btn-edit {
+  background-color: transparent;
+  color: #0d6efd;
+  border: 2px solid #0d6efd;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-edit:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+/* 削除ボタン */
+.btn-delete {
+  background-color: transparent;
+  color: #dc3545;
+  border: 2px solid #dc3545;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-delete:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+
+/* コメントカード全体 */
+.comment-card {
+  border-radius: 8px;
+  padding: 0; /* Bootstrapカードのpadding維持 */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* コメント本文エリア余白追加 */
+.comment-card .card-body {
+  background-color: #fdf5e6;
+  padding: 1rem;
+}
+
+/* コメントカードフッター余白追加 */
+.comment-card .card-footer {
+  background-color: #ffffff; 
+  padding: 0.75rem 1rem;
+}
+
+/* コメントカードヘッダー */
+.custom-comment-header {
+  background-color: #59ddf7; 
+  font-weight: bold;
+}
+
+/* 日付表示 */
+.comment-dates {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 左寄せ */
+}
+
+/* コメント日付表示 */
+.comment-dates .created-date {
+  font-size: 0.8rem; /* 少し小さめ */
+  color: #555;
+}
+
+.comment-dates .updated-date {
+  font-size: 0.7rem; /* 更に小さめ */
+  color: #888;
+}
+
+/* 編集削除ボタンエリア */
+.comment-operation-area {
+  text-align: right;
+  padding: 0 1rem 0.5rem 1rem;
+}
+
+/* 編集削除ボタンサイズ（維持） */
+.comment-operation-area .btn {
+  margin-left: 0.5rem;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+}

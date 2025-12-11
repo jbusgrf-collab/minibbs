@@ -1,0 +1,7 @@
+<h2>ユーザー登録</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">登録</button>
+</form>
+<a href="{% url 'post_list' %}" class="ms-3">戻る</a>

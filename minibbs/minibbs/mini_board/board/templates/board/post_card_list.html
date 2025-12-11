@@ -1,0 +1,53 @@
+<!-- 一覧画面でのカードの中身 -->
+
+<div class="card shadow-sm h-100 d-flex flex-column position-relative post-card" style="width: 100%;">
+
+  <div class="card-header custom-card-header">
+    投稿者: <a href="{% url 'user_posts' post.author.username %}">{{ post.author }}</a>
+  </div>
+
+  <div class="card-footer text-muted">
+    <div class="post-dates">
+      <div class="created-date">作成日: {{ post.created_at|date:"Y/m/d H:i" }}</div>
+      {% if post.is_updated %}
+        <div class="updated-date">更新日: {{ post.updated_at|date:"Y/m/d H:i" }}</div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if post.image %}
+    <a href="{{ post.image.url }}" target="_blank" rel="noopener noreferrer" style="display: block; max-height: 100px; overflow: hidden;">
+      <img src="{{ post.image.url }}" alt="投稿画像" 
+           style="height: 100px; width: 100%; object-fit: cover; display: block;">
+    </a>
+  {% endif %}
+
+  <div class="card-body post-detail-trigger" data-post-id="{{ post.pk }}" style="cursor:pointer; flex-grow: 1;">
+    <p class="card-text">{{ post.content|truncatechars:100 }}</p>
+  </div>
+
+  <div class="operation-area d-flex justify-content-between align-items-center">
+
+    <div class="like-wrapper d-flex align-items-center">
+      <button type="button" class="btn-like {% if post.is_liked %}liked{% endif %}" data-post-id="{{ post.pk }}">
+        {% if post.is_liked %}
+          <i class="fas fa-check"></i>
+        {% else %}
+          <i class="fas fa-thumbs-up"></i>
+        {% endif %}
+      </button>
+      <span class="like-count ms-2">{{ post.likes.count }}</span>
+    </div>
+
+    <div class="edit-area">
+      {% if request.user == post.author %}
+        <a href="{% url 'post_update' post.pk %}" class="btn btn-edit btn-sm">編集</a>
+        <a href="{% url 'post_delete' post.pk %}" class="btn btn-delete btn-sm">削除</a>
+      {% else %}
+        <div class="dummy-edit-area"></div>
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>

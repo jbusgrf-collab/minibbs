@@ -1,0 +1,43 @@
+{% extends 'board/base.html' %}
+
+{% block header %}
+  <div class='d-flex justify-content-end align-items-center me-5'>
+    {% if request.user.is_authenticated %}
+      <a href="{% url 'post_create' %}" class="btn btn-new-post btn-sm">新規投稿</a>
+      <span class='mx-2'>|</span>
+      <form action="{% url 'logout' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-login-logout btn-sm">ログアウト</button>
+      </form>
+    {% else %}
+      <button type="button" onclick="location.href='{% url 'login' %}'" class="btn btn-login-logout btn-sm">ログイン</button>
+      <span class='mx-2'>|</span>
+      <buttom type="button" onclick="location.href='{% url 'signup' %}'" class="btn btn-login-logout btn-sm">新規登録</buttom>
+    {% endif %}
+  </div>
+{% endblock header %}
+
+{% block content %}
+  <div class='container mt-4' style='max-width: 1200px;'>
+    <div class='d-flex flex-wrap'>
+      {% for post in posts %}
+        {% include 'board/post_card.html' %}
+      {% empty %}
+        <p class="text-center">投稿はありません。</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% include 'board/pagination.html' %}
+
+  <!-- モーダル（画像拡大表示用） -->
+  <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-transparent border-0">
+        <div class="modal-body text-center p-0">
+          <img src="" id="modalImage" class="img-fluid" alt="拡大画像">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

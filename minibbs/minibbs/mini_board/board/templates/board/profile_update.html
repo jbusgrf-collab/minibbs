@@ -1,0 +1,14 @@
+{% extends 'board/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4" style="max-width: 600px;">
+  <h3>プロフィール編集</h3>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">保存</button>
+    <a href="{% url 'post_list' %}" class="btn btn-secondary">キャンセル</a>
+  </form>
+</div>
+{% endblock %}

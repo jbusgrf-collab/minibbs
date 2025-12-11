@@ -1,0 +1,61 @@
+<!-- 詳細モーダル用のカードの中身 -->
+
+<div class='card shadow-sm h-100 d-flex flex-column position-relative post-card'
+     style='width: 100%;'
+     data-post-id="{{ post.pk }}">
+
+  <div class='card-header custom-card-header'>
+    投稿者: <a href='{% url "user_posts" post.author.username %}'>{{ post.author }}</a>
+  </div>
+
+  <div class='card-footer text-muted'>
+    <div class='post-dates'>
+      <div class='created-date'>作成日: {{ post.created_at|date:"Y/m/d H:i" }}</div>
+      {% if post.is_updated %}
+        <div class='updated-date'>更新日: {{ post.updated_at|date:"Y/m/d H:i" }}</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- ①画像クリックで拡大 -->
+  <!-- 詳細モーダル内（post_detail_partial.htmlなど） -->
+  {% if post.image %}
+    <a href="{{ post.image.url }}" target="_blank" rel="noopener noreferrer">
+      <img src="{{ post.image.url }}"
+        class="img-fluid"
+        alt="投稿画像"
+        style="max-height:300px; object-fit:contain; display:block; margin:0 auto;">
+    </a>
+  {% endif %}
+
+  <!-- 本文 -->
+  <div class='card-body post-detail-trigger' data-post-id="{{ post.pk }}" style="cursor:pointer;">
+    <p class='card-text'>{{ post.content|truncatechars:100 }}</p>
+  </div>
+
+  <!-- いいね・編集削除エリア（上下中央寄せ） -->
+  <div class="operation-area">
+    <!-- いいねボタン＋カウント -->
+    <div class="like-wrapper d-flex align-items-center">
+      <button type="button" class="btn-like {% if post.is_liked %}liked{% endif %}" data-post-id="{{ post.pk }}">
+        {% if post.is_liked %}
+        <i class="fas fa-check"></i>
+        {% else %}
+        <i class="fas fa-thumbs-up"></i>
+        {% endif %}
+      </button>
+      <span class="like-count ms-2">{{ post.likes.count }}</span>
+    </div>
+
+    <!-- 編集・削除ボタン or ダミー -->
+    <div class="edit-area">
+      {% if request.user == post.author %}
+      <a href='{% url "post_update" post.pk %}' class='btn btn-edit btn-sm'>編集</a>
+        <a href='{% url "post_delete" post.pk %}' class='btn btn-delete btn-sm'>削除</a>
+      {% else %}
+        <div class="dummy-edit-area"></div>
+      {% endif %}
+    </div>
+  </div>
+
+</div>

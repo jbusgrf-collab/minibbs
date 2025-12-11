@@ -1,0 +1,22 @@
+{% extends 'board/base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+
+    <!-- 記事情報 -->
+    <h2>「{{ post.content|linebreaksbr|slice:":30" }}...」へのコメント</h2>
+    <p>{{ post.content }}</p>
+
+    <hr>
+
+    <!-- コメント投稿フォーム -->
+    <h4>コメント投稿</h4>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">投稿する</button>
+    </form>
+    <a href="{% url 'post_detail' post.pk %}" class="ms-3">戻る</a>
+
+  </div>
+{% endblock %}

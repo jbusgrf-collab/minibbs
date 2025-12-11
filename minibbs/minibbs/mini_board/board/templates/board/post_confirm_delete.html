@@ -1,0 +1,16 @@
+{% extends 'board/base.html' %}
+
+{% block header %}
+  <title>投稿の削除確認</title>
+{% endblock header %}
+
+{% block content %}
+  <h2 class="ms-3">投稿の削除確認</h2>
+  <p class="ms-3">本当に "{{ object }}" を削除してもよろしいですか？</p>
+
+  <form method="post" class="ms-3">
+    {% csrf_token %}
+    <button type="submit">はい、削除します</button>
+    <a href="{% url 'post_list' %}">キャンセル</a>
+  </form>
+{% endblock content %}

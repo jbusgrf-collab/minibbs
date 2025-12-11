@@ -1,0 +1,19 @@
+{% extends 'board/base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h3>コメント削除確認</h3>
+    <p>本当にこのコメントを削除しますか？</p>
+    <div class="card mb-3">
+      <div class="card-body">
+        <p><strong>{{ object.author.username }}</strong> さんのコメント</p>
+        <p>{{ object.content }}</p>
+        <small class="text-muted">{{ object.created_at|date:"Y/m/d H:i" }}</small>
+      </div>
+    </div>
+    <form method="post">{% csrf_token %}
+      <button type="submit" class="btn btn-danger">削除する</button>
+      <a href="{% url 'post_detail' object.post.pk %}" class="btn btn-secondary">キャンセル</a>
+    </form>
+  </div>
+{% endblock %}
